@@ -6,13 +6,42 @@ quit=0
 
 echo "Welcome to the game!"
 echo "At any question prompt, type 'q + return' to quit the game."
+echo ""
+echo "Enter a mode to play: ((a)ddition, (s)ubtraction, (m)ultiplication, (d)ivision)"
+read -p "" mode
+
+echo ""
 
 while [[ $quit -eq 0 ]]; do
-	num1=$((RANDOM % 75))
-	num2=$((RANDOM % 75))
-	answer=$((num1+num2))
+	num1=$((RANDOM % 74 + 1))
+	num2=$((RANDOM % 74 + 1))
 
-	echo "$count. What is $num1 + $num2?"
+	case "$mode" in
+		a)
+			answer=$((num1+num2))
+			question="$num1 + $num2"
+			;;
+		s)
+			answer=$((num1-num2))
+			question="$num1 - $num2"
+			;;
+		m)
+			answer=$((num1*num2))
+			question="$num1 * $num2"
+			;;
+		d)
+			num2=$((RANDOM % 74 + 1))
+			answer=$((RANDOM % 74 + 1))
+			num1=$((num2 * answer))
+			question="$num1 / $num2"
+			;;
+		*)
+			echo "Invalid mode. Quitting game."
+			exit 1
+			;;
+	esac
+
+	echo "$count. What is $question?"
 	read -p "" input
 
 	# Quit Check
@@ -29,5 +58,7 @@ while [[ $quit -eq 0 ]]; do
 		fi
 		((count++))
 		echo ""
+
+		sleep 0.5
 	fi
 done
