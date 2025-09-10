@@ -1,0 +1,33 @@
+#!/bin/bash
+
+score=0
+count=1
+quit=0
+
+echo "Welcome to the game!"
+echo "At any question prompt, type 'q + return' to quit the game."
+
+while [[ $quit -eq 0 ]]; do
+	num1=$((RANDOM % 75))
+	num2=$((RANDOM % 75))
+	answer=$((num1+num2))
+
+	echo "$count. What is $num1 + $num2?"
+	read -p "" input
+
+	# Quit Check
+	if [[ "$input" == "q" ]]; then
+		echo "You answered $score out of $((count-1)) questions correctly."
+		quit=1
+	else
+		# Answer Check
+		if [[ "$input" -eq "$answer" ]]; then
+			echo "Your answer was correct."
+			((score++))
+		else
+			echo "Your answer was incorrect. The correct answer is $answer."
+		fi
+		((count++))
+		echo ""
+	fi
+done
