@@ -29,7 +29,6 @@ A simple terminal-based game I created to play with and learn some bash.
 ## Notes
 
 - This game will run on Windows through Git Bash
-- Tested on Linux
 - If the file does not execute, make it executable with:
   ```bash
   sudo chmod +x mathgame
